@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+        }
+    </style>
+    
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <input class="input" type="text">
+    </div>
+    <div class="row">
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">1</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">2</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">3</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">4</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">5</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">6</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">7</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">8</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">9</button>
+        <button onclick="GetNum(this)" type="button" class="btn" name="num">0</button>
+        <button type="button" class="add">+</button>
+        <button type="button" class="minus">-</button>
+        <button type="button" class="multiply">*</button>
+        <button type="button" class="divided">/</button>
+        <button type="button" class="equals">=</button>
+    </div>
+</div> 
+
+
+    <script>
+        function GetNum(e1)
+        {
+            var input = document.getElementsByClassName('input')[0];
+            input.value = input.value + e1.innerText;
+        }
+
+    </script>
+
+</body>
+
+
+</html>
