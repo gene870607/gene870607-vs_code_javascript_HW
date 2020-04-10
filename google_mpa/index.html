@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+  <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 23.7595322, lng: 120.9555389 },
+        zoom: 8
+      });
+    }
+  </script>
+
+  <script>
+    window.onload = function () {
+      $.ajax({
+        type: "Get",
+        url: "https://maskmap.azurewebsites.net/api/mask/getmaskstock",
+        dataType: "json",
+        success: function (response) {
+          let shop_data = addarrang(response);
+          AddMapMark(shop_data);
+        }
+      });
+    }
+
+    function addarrang(_response) {
+      let data = [];
+      _response.features.forEach((item, index) => {
+        let coordinates = {
+          name: item.properties.name,
+          masksLeft: item.properties.masksLeft,
+          childMasksLeft: item.properties.childMasksLeft,
+          coordinates: { lat: item.geometry.coordinates[1], lng: item.geometry.coordinates[0] },
+          icon: AddIconFilter(item.properties.masksLeft,item.properties.childMasksLeft)
+        };
+        data.push(coordinates);
+      });
+      return data;
+    }
+
+    function AddMapMark(_shop_data) {
+      _shop_data.forEach((mark_address) => {
+        var myLatLng = mark_address.coordinates;
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          icon: mark_address.icon,
+          title: `店名:${mark_address.name},大人:${mark_address.masksLeft},小孩:${mark_address.childMasksLeft}`
+        });        
+      });
+    }
+
+    function AddIconFilter(adult,child){
+        if (adult < 5 && child < 5){
+          return "Icon/04_sold_out.png";
+        }else if(adult >50 && child > 50 ){
+          return "Icon/01_have_mask.png";
+        }else{
+          return "Icon/02_adult_only.png";
+        }
+    }
+
+
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXybtSvVcl1whjEpdkJLrizCTwY_V4T_o&callback=initMap"
+    async defer></script>
+</body>
+
+</html>
