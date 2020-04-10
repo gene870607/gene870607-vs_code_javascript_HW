@@ -42,7 +42,7 @@
     window.onload = function () {
       $.ajax({
         type: "Get",
-        url: "https://maskmap.azurewebsites.net/api/mask/getmaskstock",
+        url: "https://findmasks.herokuapp.com/places",
         dataType: "json",
         success: function (response) {
           let shop_data = addarrang(response);
