@@ -73,15 +73,15 @@
           position: myLatLng,
           map: map,
           icon: mark_address.icon,
-          title: `店名:${mark_address.name},大人:${mark_address.masksLeft},小孩:${mark_address.childMasksLeft}`
+          title: `店名:${mark_address.name}\n大人:${mark_address.masksLeft}\n小孩:${mark_address.childMasksLeft}`
         });        
       });
     }
 
     function AddIconFilter(adult,child){
-        if (adult < 5 && child < 5){
+        if (adult < 21 && child < 21){
           return "Icon/04_sold_out.png";
-        }else if(adult >50 && child > 50 ){
+        }else if(adult >100 && child > 100 ){
           return "Icon/01_have_mask.png";
         }else{
           return "Icon/02_adult_only.png";
