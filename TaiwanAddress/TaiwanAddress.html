@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table,
+    th,td{
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <h1>台灣address</h1>
+    <template id="templateTitle">
+        <tr>
+            <th>縣市</th>
+            <th>區域</th>
+            <th>郵遞區號</th>
+        </tr>
+    </template>
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+
+    <script src="helpers.js"></script>
+    <script>
+        let msg = $g('msg');
+        let table = $c('table');
+        let body = $g('body');
+        let thead = $c('thead');
+        let tboody = $c('tbody');
+
+        body.appendChild(table);
+        table.appendChild(thead);
+        table.appendChild(tboody);
+
+
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    zipcodeArray = JSON.parse(this.responseText);
+
+                    let ZipCode = [];
+                    zipcodeArray.forEach((item, index) => {
+                        let _city = {
+                            CityName: item.CityName,
+                            AreaName: []
+                        };
+
+                        item.AreaList.forEach((name, index) => {
+                            let _city_data = {
+                                AreaName: name.AreaName,
+                                ZipCode: name.ZipCode
+                            };
+                            _city.AreaName.push(_city_data);
+                        });
+                        ZipCode.push(_city);
+                    });
+                    addThead();
+                    addTbody(Object.values(ZipCode));
+                }
+                else {
+                    msg.textContent = '發生錯誤，HTTP response代碼: ' + xhr.status;
+                }
+
+            }
+            xhr.open("GET", "https://raw.githubusercontent.com/2opex/Portfolio/master/JS/TaiwanAddress/TaiwanAddress.json");
+            debugger;
+            xhr.send();
+
+            function addThead() {
+                var thead = document.querySelector('thead');
+                let templateTitle = $g('#templateTitle');
+                let cloneContent =
+                    templateTitle.content.cloneNode(true);
+                thead.appendChild(cloneContent);
+            }
+
+            function addTbody(data) {
+
+                let templateRow = $g('#templateRow');
+                let tr = $g('tr');  
+                for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < data[i].AreaName.length; j++) {
+                        let cloneContent =
+                        templateRow.content.cloneNode(true);
+                        let td = cloneContent.querySelectorAll('td');
+                        td[0].textContent = data[i].CityName;
+                        td[1].textContent = data[i].AreaName[j].AreaName;
+                        td[2].textContent = data[i].AreaName[j].ZipCode;
+                        tboody.appendChild(cloneContent);
+                    }
+                }
+                table.appendChild(tboody); 
+            }
+        }
+    </script>
+</body>
+
+</html>
