@@ -64,8 +64,9 @@
             var tr = document.createElement('tr');
             
             thead.appendChild(tr);
-            var producyts = addThead.products;
-            var keys = Object.keys(producyts[0]);
+            var products = addThead.products;
+            debugger;
+            var keys = Object.keys(products[0]);
             for (let i = 0; i < keys.length; i++) {
                 let th = document.createElement('th');
                 th.setAttribute('id',`${keys[i]}`);
