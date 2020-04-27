@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <title>AppleStore</title>
+    <style>
+        .btn-control {
+            display: flex;
+            justify-content: center;
+            
+        }
+        .col-12{
+            text-align: center;
+        }
+  
+    </style>
+</head>
+
+<body>
+    <span class="btn-control">
+        <button id="btn-iphone">iphone</button>
+        <button id="btn-ipad">iPad</button>
+        <button id="btn-mac">Mac</button>
+    </span>
+
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+
+    <script>
+
+        var products = {
+            iphone: {
+                p1: { id: "p1", color: "red", price: "NT24900", storage: "64G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/iphone-red.png" },
+                p2: { id: "p2", color: "yellow", price: "NT26900", storage: "128G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/iphone-yellow.png" },
+                p3: { id: "p3", color: "black", price: "NT30400", storage: "256G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/iphone-black.png" }
+            },
+            iPad: {
+                p1: { id: "p1", color: "gray", price: "NT10900", storage: "32G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/ipad-space.png" },
+                p2: { id: "p2", color: "silver", price: "NT13900", storage: "128G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/ipad-silver.png" },
+                p3: { id: "p3", color: "gold", price: "NT13900", storage: "128G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/ipad-gold.png" }
+            },
+            Mac: {
+                p1: { id: "p1", color: "gray", price: "NT51300", storage: "256G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/mbp13touch-space.png" },
+                p2: { id: "p2", color: "silver", price: "NT57300", storage: "512G", network: "wifi", url: "https://bs2020-01.azurewebsites.net/Fake-Apple/img/mbp13touch-silver.png" }
+            }
+        };
+
+
+        var show_iphone = document.getElementById("btn-iphone");
+        var show_ipad = document.getElementById("btn-ipad");
+        var show_mac = document.getElementById("btn-mac");
+        var row = document.getElementsByClassName("row")[0];
+
+        show_iphone.onclick = function () {
+            let img_div = document.createElement('div');
+            img_div.setAttribute("class","col-12");
+            let img = document.createElement('img');
+            img.src = "https://bs2020-01.azurewebsites.net/Fake-Apple/img/iphone11-select-2019-family.png";
+            img_div.appendChild(img);
+            row.appendChild(img_div);
+            let h2 = document.createElement("h2");
+            h2.innerText = "顏色";
+            img_div.appendChild(h2);
+            let btn_red = document.createElement("button");
+            let btn_yellow = document.createElement("button");
+            let btn_black = document.createElement("button");
+            btn_red.innerText = "red";
+            btn_yellow.innerText = "yellow";
+            btn_black.innerText = "black";
+            img_div.appendChild(btn_red);
+            img_div.appendChild(btn_yellow);
+            img_div.appendChild(btn_black);
+        }
+        show_ipad.onclick = function () {
+            alert("123");
+        }
+        show_mac.onclick = function () {
+            alert("123");
+        }
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
